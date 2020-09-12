@@ -175,6 +175,7 @@ def yolo_boxes(pred, anchors, classes):
 
 
 def yolo_nms(outputs, anchors, masks, classes):
+    FLAGS = tf.compat.v1.flags.FLAGS
     # boxes, conf, type
     b, c, t = [], [], []
 

@@ -38,7 +38,7 @@ flags.DEFINE_enum('transfer', 'none',
 flags.DEFINE_integer('size', 416, 'image size')
 flags.DEFINE_integer('epochs', 2, 'number of epochs')
 flags.DEFINE_integer('batch_size', 8, 'batch size')
-flags.DEFINE_float('learning_rate', 1e-2, 'learning rate')
+flags.DEFINE_float('learning_rate', 1e-3, 'learning rate')
 flags.DEFINE_integer('num_classes', 80, 'number of classes in the model')
 flags.DEFINE_integer('weights_num_classes', None, 'specify num class for `weights` file if different, '
                      'useful in transfer learning with different number of classes')
@@ -127,23 +127,69 @@ def main(_argv):
     loss = [YoloLoss(anchors[mask], classes=FLAGS.num_classes)
             for mask in anchor_masks]
 
-    
-    
-    model.compile(optimizer=optimizer, loss=loss,
-	      run_eagerly=(FLAGS.mode == 'eager_fit'))
+    if FLAGS.mode == 'eager_tf':
+        # Eager mode is great for debugging
+        # Non eager graph mode is recommended for real training
+        avg_loss = tf.keras.metrics.Mean('loss', dtype=tf.float32)
+        avg_val_loss = tf.keras.metrics.Mean('val_loss', dtype=tf.float32)
 
-    callbacks = [
-              ReduceLROnPlateau(verbose=1),
-              EarlyStopping(patience=7, verbose=1),
-              ModelCheckpoint('checkpoints/yolov3_train_{epoch}.tf',
-		    verbose=1, save_weights_only=True),
-             TensorBoard(log_dir='logs')
-             ]
+        for epoch in range(1, FLAGS.epochs + 1):
+            for batch, (images, labels) in enumerate(train_dataset):
+                with tf.GradientTape() as tape:
+                    outputs = model(images, training=True)
+                    regularization_loss = tf.reduce_sum(model.losses)
+                    pred_loss = []
+                    for output, label, loss_fn in zip(outputs, labels, loss):
+                        pred_loss.append(loss_fn(label, output))
+                    total_loss = tf.reduce_sum(pred_loss) + regularization_loss
 
-    history = model.fit(train_dataset,
-		    epochs=FLAGS.epochs,
-		    callbacks=callbacks,
-		    validation_data=val_dataset)
+                grads = tape.gradient(total_loss, model.trainable_variables)
+                optimizer.apply_gradients(
+                    zip(grads, model.trainable_variables))
+
+                logging.info("{}_train_{}, {}, {}".format(
+                    epoch, batch, total_loss.numpy(),
+                    list(map(lambda x: np.sum(x.numpy()), pred_loss))))
+                avg_loss.update_state(total_loss)
+
+            for batch, (images, labels) in enumerate(val_dataset):
+                outputs = model(images)
+                regularization_loss = tf.reduce_sum(model.losses)
+                pred_loss = []
+                for output, label, loss_fn in zip(outputs, labels, loss):
+                    pred_loss.append(loss_fn(label, output))
+                total_loss = tf.reduce_sum(pred_loss) + regularization_loss
+
+                logging.info("{}_val_{}, {}, {}".format(
+                    epoch, batch, total_loss.numpy(),
+                    list(map(lambda x: np.sum(x.numpy()), pred_loss))))
+                avg_val_loss.update_state(total_loss)
+
+            logging.info("{}, train: {}, val: {}".format(
+                epoch,
+                avg_loss.result().numpy(),
+                avg_val_loss.result().numpy()))
+
+            avg_loss.reset_states()
+            avg_val_loss.reset_states()
+            model.save(
+                'checkpoints/yolov3_train_{}.tf'.format(epoch))
+    else:
+        model.compile(optimizer=optimizer, loss=loss,
+                      run_eagerly=(FLAGS.mode == 'eager_fit'))
+
+        callbacks = [
+            ReduceLROnPlateau(verbose=1,patience=3,min_lr=0.000001),
+            EarlyStopping(patience=7, verbose=1),
+            ModelCheckpoint('checkpoints/yolov3_train_{epoch}.tf',
+                            verbose=1, save_weights_only=True),
+            TensorBoard(log_dir='logs')
+        ]
+
+        history = model.fit(train_dataset,
+                            epochs=FLAGS.epochs,
+                            callbacks=callbacks,
+                            validation_data=val_dataset)
 
 
 if __name__ == '__main__':

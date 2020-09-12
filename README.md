@@ -5,6 +5,9 @@
 ## Key Features
 
 Mainly uses implementation of following repo
+In case of any issue refer to the original implementation
+
+The code is updated and made functional according to Tensorflow 2.0
 https://github.com/zzh8829/yolov3-tf2
 
 
@@ -172,30 +175,4 @@ train.py:
     (default: '')
   --weights: path to weights file
     (default: './checkpoints/yolov3.tf')
-```
 
-## Change Log
-
-#### October 1, 2019
-
-- Updated to Tensorflow to v2.0.0 Release
-
-
-## References
-
-It is pretty much impossible to implement this from the yolov3 paper alone. I had to reference the official (very hard to understand) and many un-official (many minor errors) repos to piece together the complete picture.
-
-- https://github.com/pjreddie/darknet
-    - official yolov3 implementation
-- https://github.com/AlexeyAB
-    - explinations of parameters
-- https://github.com/qqwweee/keras-yolo3
-    - models
-    - loss functions
-- https://github.com/YunYang1994/tensorflow-yolov3
-    - data transformations
-    - loss functions
-- https://github.com/ayooshkathuria/pytorch-yolo-v3
-    - models
-- https://github.com/broadinstitute/keras-resnet
-    - batch normalization fix

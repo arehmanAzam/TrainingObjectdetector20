@@ -83,13 +83,11 @@ python train.py --dataset ./data/voc_train.tfrecord --val_dataset ./data/voc_val
 
 ## Testing
 For testing the model can be found on the following link: 
-#### Copy model files to checkpoint directory
 
 -For now the checkpoint files are larger and can't be uploaded in git. Please download it from following link 
 ```
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1I9ugHr_dnQD00zMeOKgW26BNqXi6OEwn' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1I9ugHr_dnQD00zMeOKgW26BNqXi6OEwn" -O yolov3_train_11.tf.zip && rm -rf /tmp/cookies.txt
 ```
-
 
 put it in checkpoints folder
 
@@ -126,8 +124,10 @@ python detect_video.py --video path_to_file.mp4 --weights ./checkpoints/yolov3-t
 python detect_video.py --video path_to_file.mp4 --output ./output.avi
 ```
 
+
 ## Deployment Notes
-In process
+For deployment refer to the following repo: 
+https://github.com/arehmanAzam/detector20_deploy
 
 ## Command Line Args Reference
 

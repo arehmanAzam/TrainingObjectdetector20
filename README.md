@@ -124,7 +124,12 @@ python detect_video.py --video path_to_file.mp4 --weights ./checkpoints/yolov3-t
 python detect_video.py --video path_to_file.mp4 --output ./output.avi
 ```
 ## test results 
-fscore / precision / recall: 0.60, 0.63, 0.67
+These are the test results of two classes Oakley M2 and Oakley2
+
+| F1 Score  | 0.62 |
+|-----------|------|
+| Precision | 0.64 |
+| Recall    | 0.61 |
 
 These metrics are measured using this repository. Will upload the code and method of it earlier.
 https://github.com/penny4860/tf2-eager-yolo3

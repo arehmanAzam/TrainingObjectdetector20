@@ -131,7 +131,7 @@ These are the test results of two classes Oakley M2 and Oakley2
 | Precision | 0.64 |
 | Recall    | 0.61 |
 
-These metrics are measured using this repository. Will upload the code and method of it earlier.
+These metrics are measured using this repository. Will upload the code and method of it later.
 https://github.com/penny4860/tf2-eager-yolo3
 
 ## Deployment Notes

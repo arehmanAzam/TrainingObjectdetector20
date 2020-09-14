@@ -123,7 +123,11 @@ python detect_video.py --video path_to_file.mp4 --weights ./checkpoints/yolov3-t
 # video file with output
 python detect_video.py --video path_to_file.mp4 --output ./output.avi
 ```
+## test results 
+fscore / precision / recall: 0.60, 0.63, 0.67
 
+These metrics are measured using this repository. Will upload the code and method of it earlier.
+https://github.com/penny4860/tf2-eager-yolo3
 
 ## Deployment Notes
 For deployment refer to the following repo: 

@@ -44,6 +44,11 @@ python convert.py --weights ./data/yolov3-tiny.weights --output ./checkpoints/yo
 
 
 ### Conversion of VOC dataset annotated to tf.data.record
+Dataset can found in the following link:
+```
+https://drive.google.com/drive/folders/14eYZa4FpspzGlYm6NP5hihC_reA6m3s_?usp=sharing
+```
+
 Place dataset in the format of VOC2009 in the data directory and convert using following commands
 
 ``` bash
@@ -77,6 +82,32 @@ python train.py --dataset ./data/voc_train.tfrecord --val_dataset ./data/voc_val
 ```
 
 ## Testing
+For testing the model can be found on the following link: 
+#### Copy model files to checkpoint directory
+
+-For now the checkpoint files are larger and can't be uploaded in git. Please download it from following link 
+```
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1I9ugHr_dnQD00zMeOKgW26BNqXi6OEwn' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1I9ugHr_dnQD00zMeOKgW26BNqXi6OEwn" -O yolov3_train_11.tf.zip && rm -rf /tmp/cookies.txt
+```
+
+
+put it in checkpoints folder
+
+```
+-->yolov3_tf2
+   |->checkpoints
+     |->checkpoint (file)
+```
+
+Also rename the model name in checkpoint file accoding to the epoch number and files
+For example
+
+For files 
+
+#### yolov3_train_11.tf.data-00000-of-00002, yolov3_train_11.tf.index, yolov3_train_11.tf.data-00001-of-00002
+
+Specify 
+#### yolov3_train_11.tf
 
 ```bash
 # yolov3

@@ -88,7 +88,10 @@ For testing the model can be found on the following link:
 ```
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1I9ugHr_dnQD00zMeOKgW26BNqXi6OEwn' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1I9ugHr_dnQD00zMeOKgW26BNqXi6OEwn" -O yolov3_train_11.tf.zip && rm -rf /tmp/cookies.txt
 ```
-
+4 class detector model files
+```
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1dMDY56iVm9KrnIC1u7H3Ti958hVsX25G' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dMDY56iVm9KrnIC1u7H3Ti958hVsX25G" -O yolov3_train_22.tf.zip && rm -rf /tmp/cookies.txt
+```
 put it in checkpoints folder
 
 ```

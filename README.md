@@ -92,6 +92,8 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 ```
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1dMDY56iVm9KrnIC1u7H3Ti958hVsX25G' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1dMDY56iVm9KrnIC1u7H3Ti958hVsX25G" -O yolov3_train_22.tf.zip && rm -rf /tmp/cookies.txt
 ```
+9 class detector model files
+
 ```
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1qW_rJDGpj4sEwmUXAbrEE9t4doBEqMTe' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1qW_rJDGpj4sEwmUXAbrEE9t4doBEqMTe" -O yolov3_train_44.tf.zip && rm -rf /tmp/cookies.txt
 ```

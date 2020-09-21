@@ -97,6 +97,10 @@ wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download
 ```
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1qW_rJDGpj4sEwmUXAbrEE9t4doBEqMTe' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1qW_rJDGpj4sEwmUXAbrEE9t4doBEqMTe" -O yolov3_train_44.tf.zip && rm -rf /tmp/cookies.txt
 ```
+9 class detector with augmentation finetuning
+```
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1LdTGcDY9Aw2l_plMqiGvuUJ4vp3Rh5DD' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1LdTGcDY9Aw2l_plMqiGvuUJ4vp3Rh5DD" -O yolov3_train_e2_8.tf.zip && rm -rf /tmp/cookies.txt
+```
 
 put it in checkpoints folder
 
